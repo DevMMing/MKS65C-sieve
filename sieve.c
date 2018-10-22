@@ -1,37 +1,40 @@
 
 
 #include <stdio.h>
-
 #include <stdlib.h>
-
 #include "sieve.h"
+#include <math.h>
 
 int sieve(int targetPrime){
-  int table[targetPrime*targetPrime];
-  for(int a=0;a<targetPrime*TargetPrime){
-    table[a]=1;
+  int size=targetPrime*targetPrime*5;
+  int table[size];
+  for(int a=2;a<size;a++){
+    table[a]=a;
   }
-  for(int i=1;i<targetPrime;i++){
-    if (table[targetPrime]=1){
-      table[targetPrime]=0;
-      for(j=2;j<targetPrime;j+i){
-	if(table[targetPrime]%i==0){
-	  table[targetPrime]=0;
+  for(int i=2;i<size;i++){
+    for(int j=i+1;j<size;j++){
+	     if(j%i==0){
+	        table[j]=0;
       }
     }
   }
-    int hold=targetPrime;
-    int start=0;
+    int remain=targetPrime;
     int result;
-    while(hold>0){
-      if (table[start]==1){
+    for(int start=2; start<size;start++){
+      if (table[start]!=0){
+        remain--;
+        result=start;
+      }
+      if(remain==0){
+        break;
       }
     }
     return result;
 }
+
 int main(int argc, char * argv[]){
   int iterations = 1;
-  int target = 1000000;
+  int target = 10;
   if(argc > 1){
     target = atoi(argv[1]);
   }
